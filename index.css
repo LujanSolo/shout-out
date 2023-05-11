@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: rgb(17, 24, 39);
+}
+
+body {
+  background-color: rgb(17, 24, 39);
+}
+
+h1 {
+  color: red;
+}
