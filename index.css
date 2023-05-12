@@ -26,7 +26,7 @@ img {
   height: 90px;
 }
 
-h1 {
+#hero-header {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
   font-size: 25px;
@@ -38,13 +38,14 @@ h1 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
   gap: 14px;
 }
 
 input, textarea {
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   background: #444059;
   color: #8f8f8f;
 }
@@ -74,4 +75,28 @@ input, textarea {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
   font-size: 22px;
+}
+
+#output-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  padding: 12px;
+}
+
+#endorse-header {
+  font-weight: 400;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.endorse-box {
+  height: 130px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  margin: 12px 0;
+  padding: 8px;
 }
