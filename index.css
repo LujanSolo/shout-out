@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  margin: 20px auto;
   background: rgba(17, 24, 39, 1);
   width: 400px;
   font-family: "Josefin Sans", sans-serif, monospace;
@@ -92,11 +93,19 @@ input, textarea {
 }
 
 .endorse-box {
-  height: 130px;
-  width: 320px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   background: #ffffff;
   margin: 12px 0;
   padding: 8px;
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: 14px;
+  width: 320px;
+}
+
+.endorse-paragraph {
+  font-weight: 400;
+  padding: 12px 0 8px 0;
 }
