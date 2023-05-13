@@ -1,12 +1,13 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import {
   getDatabase,
+  push,
   ref,
   onValue
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const firebaseConfig = {
-  databaseURL: "https://shoutout-a4642-default-rtdb.firebaseio.com/",
+  databaseURL: "https://shout-out-ee341-default-rtdb.firebaseio.com/",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -18,24 +19,46 @@ const fromEl = document.getElementById("from-field");
 const toEl = document.getElementById("to-field");
 
 const publishBtn = document.getElementById("publish-btn");
+
+// field for pushing array items to dynamic field
 const endorseResults = document.getElementById("output-container");
+
 const heartIconBtn = document.getElementById("heart-icon");
 
 
 publishBtn.addEventListener("click", () => {
+  let endorsementInput = {
+    comment: endorseInputEl.value,
+    fromInput: fromEl.value,
+    toInput: toEl.value
+  };
 
-  // send the info from the 3 fields to firebase server
-  // using those values from firebase, populate the necessary fields in the "endorse-box"
+  if (endorsementInput) {
+    push(endorsementsDB, endorsementInput);
+    clearAllInputs();
+  } else {
+    alert("please enter a fill out all fields")
+  };
+});
 
-  endorseResults.innerHTML = `<div class="endorse-box">
-      <h3 class="endorse-to">To ${toValue}</h3>
-      <p class="endorse-paragraph">${endorseValue}</p>
-      <h3 class="endorse-from">From ${fromValue}</h3>
-      <button id="heart-icon">❤️ <span id="heart-count">${heart - count}</span></button> //* add eventlistener to span
-    </div>`;
-})
+function clearAllInputs() {
+  endorseInputEl.value = "";
+  fromEl.value = "";
+  toEl.value = "";
+}
 
-heartIconBtn.addEventListener("click", () => {
-  let heartCountEl = document.getElementById("heart-count");
 
-})
+
+// send the info from the 3 fields to firebase server
+// using those values from firebase, populate the necessary fields in the "endorse-box"
+
+// endorseResults.innerHTML = `<div class="endorse-box">
+//     <h3 class="endorse-to">To ${toValue}</h3>
+//     <p class="endorse-paragraph">${endorseValue}</p>
+//     <h3 class="endorse-from">From ${fromValue}</h3>
+//     <button id="heart-icon">❤️ <span id="heart-count">${heart - count}</span></button> //* add eventlistener to span
+//   </div>`;
+// heartIconBtn.addEventListener("click", () => {
+//   let heartCountEl = document.getElementById("heart-count");
+
+// })
