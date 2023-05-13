@@ -3,7 +3,7 @@ import {
   getDatabase,
   push,
   ref,
-  onValue
+  onValue,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -25,21 +25,22 @@ const endorseResults = document.getElementById("output-container");
 
 const heartIconBtn = document.getElementById("heart-icon");
 
-
 publishBtn.addEventListener("click", () => {
   let endorsementInput = {
     comment: endorseInputEl.value,
     fromInput: fromEl.value,
-    toInput: toEl.value
+    toInput: toEl.value,
   };
 
   if (endorsementInput) {
     push(endorsementsDB, endorsementInput);
     clearAllInputs();
   } else {
-    alert("please enter a fill out all fields")
-  };
+    alert("please enter a fill out all fields");
+  }
 });
+
+onValue(endorsementsDB, function (snapshot) {});
 
 function clearAllInputs() {
   endorseInputEl.value = "";
@@ -47,17 +48,22 @@ function clearAllInputs() {
   toEl.value = "";
 }
 
+function appendEndorsement(endorsement) {
+  let endorsementID = endorsement[0];
+  let endorsementValue = endorsement[1];
+  let fromValue = endorsement[2];
+  let toValue = endorsement[3];
 
+  endorseResults.innerHTML = `
+    <div class="endorse-box">
+      <h3 class="endorse-to">To ${toValue}</h3>
+      <p class="endorse-paragraph">${endorsementValue}</p>
+      <h3 class="endorse-from">From ${fromValue}</h3>
+      <button id="heart-icon">❤️ <span id="heart-count"></span></button> 
+    </div>
+  `;
+}
 
-// send the info from the 3 fields to firebase server
-// using those values from firebase, populate the necessary fields in the "endorse-box"
-
-// endorseResults.innerHTML = `<div class="endorse-box">
-//     <h3 class="endorse-to">To ${toValue}</h3>
-//     <p class="endorse-paragraph">${endorseValue}</p>
-//     <h3 class="endorse-from">From ${fromValue}</h3>
-//     <button id="heart-icon">❤️ <span id="heart-count">${heart - count}</span></button> //* add eventlistener to span
-//   </div>`;
 // heartIconBtn.addEventListener("click", () => {
 //   let heartCountEl = document.getElementById("heart-count");
 
