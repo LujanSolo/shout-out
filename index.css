@@ -109,3 +109,8 @@ input, textarea {
   font-weight: 400;
   padding: 12px 0 8px 0;
 }
+
+#heart-btn {
+  border: none;
+  background: transparent;
+}
