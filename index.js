@@ -50,9 +50,11 @@ onValue(endorsementsDB, function (snapshot) {
     for (let i = 0; i < endorseArray.length; i++) {
       let endorsementItem = endorseArray[i];
       let endorsementItemID = endorseArray[0];
-      let endorsementItemValue = endorseArray[1].comment;
-      let fromValue = endorseArray[1].fromInput;
-      let toValue = endorseArray[1].toInput;
+      // let endorsementItemValue = endorseArray[1].comment;
+      // let fromValue = endorseArray[1].fromInput;
+      // let toValue = endorseArray[1].toInput;
+      // let likesValue = endorseArray[1].likes;
+      
 
       appendEndorsement(endorsementItem);
     };
@@ -77,13 +79,14 @@ function appendEndorsement(endorsement) {
   let fromValue = endorsement[1].fromInput;
   let toValue = endorsement[1].toInput;
   let likesValue = endorsement[1].likes;
-
+  console.log(likesValue)
+  
   endorsementResults.innerHTML += `
     <div class="endorse-box">
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
       <h3 class="endorse-from">From ${fromValue}</h3>
-      <button id="heart-btn">❤️ <span id="likes-count">${likesValue}</span></button> 
+      <button id="heart-btn">❤️ <span id="likes-count">${likesValue === undefined ? likesValue = 0 : likesValue}</span></button> 
     </div>
   `;
 };
