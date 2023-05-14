@@ -23,7 +23,8 @@ const publishBtn = document.getElementById("publish-btn");
 // field for pushing array items to dynamic field
 const endorsementResults = document.getElementById("output-container");
 
-const heartIconBtn = document.getElementById("heart-icon");
+const heartButton = document.getElementById("heart-btn");
+const likeClicksEl = document.getElementById("likes-count");
 
 publishBtn.addEventListener("click", () => {
   let endorsementInput = {
@@ -41,18 +42,20 @@ publishBtn.addEventListener("click", () => {
 });
 
 onValue(endorsementsDB, function (snapshot) {
+  
   if (snapshot.exists()) {
     let endorseArray = Object.entries(snapshot.val());
     console.log(endorseArray)
-
+    clearEndorsementField();
     for (let i = 0; i < endorseArray.length; i++) {
       let endorsementItem = endorseArray[i];
       let endorsementItemID = endorseArray[0];
       let endorsementItemValue = endorseArray[1].comment;
       let fromValue = endorseArray[1].fromInput;
       let toValue = endorseArray[1].toInput;
-      appendEndorsement(endorsementItem)
-    }
+
+      appendEndorsement(endorsementItem);
+    };
   } else {
     endorsementResults.innerHTML = "nothing here, yet..."
   }
@@ -64,25 +67,31 @@ function clearAllInputs() {
   toEl.value = "";
 }
 
+function clearEndorsementField() {
+  endorsementResults.innerHTML = "";
+}
+
 function appendEndorsement(endorsement) {
   let endorsementID = endorsement[0];
   let endorsementValue = endorsement[1].comment;
   let fromValue = endorsement[1].fromInput;
   let toValue = endorsement[1].toInput;
-
-  console.log(fromValue)
+  let likesValue = endorsement[1].likes;
 
   endorsementResults.innerHTML += `
     <div class="endorse-box">
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
       <h3 class="endorse-from">From ${fromValue}</h3>
-      <button id="heart-btn">❤️ <span id="heart-count"></span></button> 
+      <button id="heart-btn">❤️ <span id="likes-count">${likesValue}</span></button> 
     </div>
   `;
+};
+
+function likeButton() {
+
+    heartButton.addEventListener("click", () => {
+      // let heartCountEl = document.getElementById("heart-count");
+      console.log("clicked")})
+    
 }
-
-// heartIconBtn.addEventListener("click", () => {
-//   let heartCountEl = document.getElementById("heart-count");
-
-// })
