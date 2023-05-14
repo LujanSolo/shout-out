@@ -21,7 +21,7 @@ const toEl = document.getElementById("to-field");
 const publishBtn = document.getElementById("publish-btn");
 
 // field for pushing array items to dynamic field
-const endorseResults = document.getElementById("output-container");
+const endorsementResults = document.getElementById("output-container");
 
 const heartIconBtn = document.getElementById("heart-icon");
 
@@ -29,18 +29,34 @@ publishBtn.addEventListener("click", () => {
   let endorsementInput = {
     comment: endorseInputEl.value,
     fromInput: fromEl.value,
-    toInput: toEl.value,
+    toInput: toEl.value
   };
 
   if (endorsementInput) {
     push(endorsementsDB, endorsementInput);
     clearAllInputs();
   } else {
-    alert("please enter a fill out all fields");
+    alert("please fill out all fields");
   }
 });
 
-onValue(endorsementsDB, function (snapshot) {});
+onValue(endorsementsDB, function (snapshot) {
+  if (snapshot.exists()) {
+    let endorseArray = Object.entries(snapshot.val());
+    console.log(endorseArray)
+
+    for (let i = 0; i < endorseArray.length; i++) {
+      let endorsementItem = endorseArray[i];
+      let endorsementItemID = endorseArray[0];
+      let endorsementItemValue = endorseArray[1].comment;
+      let fromValue = endorseArray[1].fromInput;
+      let toValue = endorseArray[1].toInput;
+      appendEndorsement(endorsementItem)
+    }
+  } else {
+    endorsementResults.innerHTML = "nothing here, yet..."
+  }
+});
 
 function clearAllInputs() {
   endorseInputEl.value = "";
@@ -50,11 +66,13 @@ function clearAllInputs() {
 
 function appendEndorsement(endorsement) {
   let endorsementID = endorsement[0];
-  let endorsementValue = endorsement[1];
-  let fromValue = endorsement[2];
-  let toValue = endorsement[3];
+  let endorsementValue = endorsement[1].comment;
+  let fromValue = endorsement[1].fromInput;
+  let toValue = endorsement[1].toInput;
 
-  endorseResults.innerHTML = `
+  console.log(fromValue)
+
+  endorsementResults.innerHTML += `
     <div class="endorse-box">
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
