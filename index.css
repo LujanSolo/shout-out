@@ -108,6 +108,7 @@ input, textarea {
 .endorse-paragraph {
   font-weight: 400;
   padding: 12px 0 8px 0;
+  width: 320px;
 }
 
 #heart-btn {

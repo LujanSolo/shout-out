@@ -77,7 +77,7 @@ function appendEndorsement(endorsement) {
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
       <h3 class="endorse-from">From ${fromValue}</h3>
-      <button id="heart-icon">❤️ <span id="heart-count"></span></button> 
+      <button id="heart-btn">❤️ <span id="heart-count"></span></button> 
     </div>
   `;
 }
