@@ -56,7 +56,7 @@ document.addEventListener("click", (e) => {
 
     set(endorsementRef, currentLikesCount);
   }
-}, { once: true });  //! will this allow each unique user to click like? or just one click EVER?
+}, { once: true });  //TODO Find a way to allow user to de-select the like button (future dev)
 
 onValue(endorsementsDB, function (snapshot) {
   if (snapshot.exists()) {
