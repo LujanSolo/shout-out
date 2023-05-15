@@ -24,50 +24,60 @@ const publishBtn = document.getElementById("publish-btn");
 const endorsementResults = document.getElementById("output-container");
 
 let likeButton = document.getElementById("like-btn");
-let likeClicksEl = document.getElementById("likes-count");
+let likeCount = document.getElementById("likes-count");
+
+
 
 publishBtn.addEventListener("click", () => {
-  
   let endorsementInput = {
     comment: endorseInputEl.value,
     fromInput: fromEl.value,
-    likes: likeClicksEl,
+    likes: likeCount.value,
     toInput: toEl.value
   };
 
-  if (endorsementInput.comment && endorsementInput.fromInput && endorsementInput.toInput) {
+  if (
+    endorsementInput.comment &&
+    endorsementInput.fromInput &&
+    endorsementInput.toInput
+  ) {
     push(endorsementsDB, endorsementInput);
     clearAllInputs();
   } else {
-    alert('Please enter a value in each field.');
+    alert("Please enter a value in each field.");
   }
 });
 
 onValue(endorsementsDB, function (snapshot) {
-  
   if (snapshot.exists()) {
-    let endorseArray = Object.entries(snapshot.val());
-    console.log(endorseArray)
+    let endorsementsArray = Object.entries(snapshot.val());
+    console.log(endorsementsArray);
     clearEndorsementField();
 
-    for (let i = 0; i < endorseArray.length; i++) {
-      let endorsementItem = endorseArray[i];
-      let endorsementItemID = endorseArray[0];
-      // let endorsementItemValue = endorseArray[1].comment;
-      // let fromValue = endorseArray[1].fromInput;
-      // let toValue = endorseArray[1].toInput;
-      // let likesValue = endorseArray[1].likes;
-      
-      appendEndorsement(endorsementItem);
-    };
+    for (let i = 0; i < endorsementsArray.length; i++) {
+      let endorsementItem = endorsementsArray[i];
+      // let endorsementItemID = endorsementsArray[0];
+      // let endorsementItemValue = endorsementsArray[1].comment;
+      // let fromValue = endorsementsArray[1].fromInput;
+      // let toValue = endorsementsArray[1].toInput;
+      // let likesValue = endorsementsArray[1].likes;
 
-    document.addEventListener("click", likeButtonListener);
-    likeButtonListener();
+      appendEndorsement(endorsementItem);
+
+      document.addEventListener("click", function (e) {
+        const target = e.target.closest("#like-btn");
+        // likeCount = 0;
+        if (target) {
+          likeCount++;
+          console.log("clicked");
+        }
+      });
+    }
+
+    
   } else {
-    endorsementResults.innerHTML = "nothing here, yet..."
-  };
-  
-  
+    endorsementResults.innerHTML = "nothing here, yet...";
+  }
 });
 
 function clearAllInputs() {
@@ -86,8 +96,7 @@ function appendEndorsement(endorsement) {
   let fromValue = endorsement[1].fromInput;
   let toValue = endorsement[1].toInput;
   let likesValue = endorsement[1].likes;
-  console.log(likesValue)
-  
+
   endorsementResults.innerHTML += `
     <div class="endorse-box">
       <h3 class="endorse-to">To ${toValue}</h3>
@@ -98,12 +107,12 @@ function appendEndorsement(endorsement) {
   `;
 }
 
-function likeButtonListener(event) {
-  let element = event.target;
-  if(element.tagName == 'button' && element.idList.contains("like-btn")){
-    console.log('clicked')
-  }
-  
-}
+// function likeButtonListener(event) {
+//   let element = event.target;
+//   if(element.tagName == 'button' && element.idList.contains("like-btn")){
+//     console.log('clicked')
+//   }
+
+// }
 
 // ${likesValue === undefined ? likesValue = 0 : likesValue}
