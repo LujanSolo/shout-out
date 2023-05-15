@@ -13,6 +13,7 @@ body {
   background: rgba(17, 24, 39, 1);
   width: 400px;
   font-family: "Josefin Sans", sans-serif, monospace;
+  color: #ffffff;
 }
 
 #hero {
@@ -90,7 +91,7 @@ input, textarea {
   font-weight: 400;
   font-size: 20px;
   color: #ffffff;
-  order: 1;  /* using this to undo the column-reverse from parent container */
+  margin: 1rem 0 .2rem 0;
 }
 
 .endorse-box {
@@ -112,7 +113,7 @@ input, textarea {
   width: 320px;
 }
 
-#like-btn {
+#heart-btn {
   border: none;
   background: transparent;
 }

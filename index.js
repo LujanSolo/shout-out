@@ -68,7 +68,6 @@ onValue(endorsementsDB, function (snapshot) {
     for (let i = 0; i < endorsementsArray.length; i++) {
       let currentEndorsement = endorsementsArray[i];
       let currentEndorsementID = currentEndorsement[0];
-
       appendEndorsement([currentEndorsementID, currentEndorsement[1]]);
     }
   } else {
@@ -88,8 +87,9 @@ function appendEndorsement(endorsement) {
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
       <h4 class="endorse-from">From ${fromValue}</h4>
-      <button id="like-btn">❤️ <span id="likes-count">${likesValue === undefined ? (likesValue = 0) : likesValue
-    }</span></button>
+      <button id="like-btn">❤️ <span id="likes-count">${
+        likesValue === undefined ? (likesValue = 0) : likesValue
+      }</span></button>
     </div>
   `;
 }
