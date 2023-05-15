@@ -56,7 +56,7 @@ document.addEventListener("click", (e) => {
 
     set(endorsementRef, currentLikesCount);
   }
-}, { once: true });
+}, { once: true });  //! will this allow each unique user to click like? or just one click EVER?
 
 onValue(endorsementsDB, function (snapshot) {
   if (snapshot.exists()) {
@@ -87,9 +87,8 @@ function appendEndorsement(endorsement) {
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
       <h4 class="endorse-from">From ${fromValue}</h4>
-      <button id="like-btn">❤️ <span id="likes-count">${
-        likesValue === undefined ? (likesValue = 0) : likesValue
-      }</span></button>
+      <button id="like-btn">❤️ <span id="likes-count">${likesValue === undefined ? (likesValue = 0) : likesValue
+    }</span></button>
     </div>
   `;
 }
