@@ -84,7 +84,6 @@ textarea {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  margin: 20px 0;
   padding: 12px;
 }
 
