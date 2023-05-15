@@ -56,7 +56,7 @@ document.addEventListener("click", (e) => {
 
     set(endorsementRef, currentLikesCount);
   }
-});
+}, { once: true });
 
 onValue(endorsementsDB, function (snapshot) {
   if (snapshot.exists()) {
