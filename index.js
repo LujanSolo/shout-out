@@ -23,21 +23,23 @@ const publishBtn = document.getElementById("publish-btn");
 // field for pushing array items to dynamic field
 const endorsementResults = document.getElementById("output-container");
 
-const heartButton = document.getElementById("heart-btn");
-const likeClicksEl = document.getElementById("likes-count");
+let likeButton = document.getElementById("like-btn");
+let likeClicksEl = document.getElementById("likes-count");
 
 publishBtn.addEventListener("click", () => {
+  
   let endorsementInput = {
     comment: endorseInputEl.value,
     fromInput: fromEl.value,
+    likes: likeClicksEl,
     toInput: toEl.value
   };
 
-  if (endorsementInput) {
+  if (endorsementInput.comment && endorsementInput.fromInput && endorsementInput.toInput) {
     push(endorsementsDB, endorsementInput);
     clearAllInputs();
   } else {
-    alert("please fill out all fields");
+    alert('Please enter a value in each field.');
   }
 });
 
@@ -47,6 +49,7 @@ onValue(endorsementsDB, function (snapshot) {
     let endorseArray = Object.entries(snapshot.val());
     console.log(endorseArray)
     clearEndorsementField();
+
     for (let i = 0; i < endorseArray.length; i++) {
       let endorsementItem = endorseArray[i];
       let endorsementItemID = endorseArray[0];
@@ -55,12 +58,16 @@ onValue(endorsementsDB, function (snapshot) {
       // let toValue = endorseArray[1].toInput;
       // let likesValue = endorseArray[1].likes;
       
-
       appendEndorsement(endorsementItem);
     };
+
+    document.addEventListener("click", likeButtonListener);
+    likeButtonListener();
   } else {
     endorsementResults.innerHTML = "nothing here, yet..."
-  }
+  };
+  
+  
 });
 
 function clearAllInputs() {
@@ -86,15 +93,17 @@ function appendEndorsement(endorsement) {
       <h3 class="endorse-to">To ${toValue}</h3>
       <p class="endorse-paragraph">${endorsementValue}</p>
       <h3 class="endorse-from">From ${fromValue}</h3>
-      <button id="heart-btn">❤️ <span id="likes-count">${likesValue === undefined ? likesValue = 0 : likesValue}</span></button> 
+      <button id="like-btn">❤️ <span id="likes-count">${likesValue}</span></button> 
     </div>
   `;
-};
-
-function likeButton() {
-
-    heartButton.addEventListener("click", () => {
-      // let heartCountEl = document.getElementById("heart-count");
-      console.log("clicked")})
-    
 }
+
+function likeButtonListener(event) {
+  let element = event.target;
+  if(element.tagName == 'button' && element.idList.contains("like-btn")){
+    console.log('clicked')
+  }
+  
+}
+
+// ${likesValue === undefined ? likesValue = 0 : likesValue}
