@@ -44,7 +44,8 @@ img {
   gap: 14px;
 }
 
-input, textarea {
+input,
+textarea {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -91,7 +92,7 @@ input, textarea {
   font-weight: 400;
   font-size: 20px;
   color: #ffffff;
-  margin: 1rem 0 .2rem 0;
+  margin: 1rem 0 0.2rem 0;
 }
 
 .endorse-box {
@@ -101,19 +102,21 @@ input, textarea {
   background: #ffffff;
   margin: 12px 0;
   padding: 8px;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 700;
   font-size: 14px;
   width: 320px;
+  color: rgba(17, 24, 39, 1);
 }
 
 .endorse-paragraph {
   font-weight: 400;
   padding: 12px 0 8px 0;
   width: 320px;
+  color: rgba(17, 24, 39, 1);
 }
 
-#heart-btn {
+#like-btn {
   border: none;
   background: transparent;
 }
